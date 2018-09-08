@@ -32,7 +32,7 @@
         Public Crypto Key: {{ players.p2.keys.crypt.publicKey }}
       </p>
     </div>
-     <div id="player">
+     <div id="player3">
       <p>Player 3</p>
       <p>
         Private Signing Key: {{ players.p3.keys.verify.privateKey }}
