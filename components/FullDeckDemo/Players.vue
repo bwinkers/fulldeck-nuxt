@@ -35,24 +35,34 @@
 
 <script>
 export default {
+  head () {
+    return {
+      script: [
+        { src: 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js' }
+      ]
+    }
+  },
   computed: {
 
   },
   methods: {
     resetGame(e) {
-    //  this.$store.commit('players/add', e.target.value)
-    //  e.target.value = ''
-    var self=this;
-       return crypto.subtle.generateKey({name: "RSA-OAEP", modulusLength: 2048, publicExponent: new Uint8Array([0x01, 0x00, 0x01]), hash: {name: "SHA-256"}}, false, ["encrypt", "decrypt"])
-        .then(function(key){
-          crypto.subtle.exportKey('jwk', key.publicKey)
-          .then(function(keyOut){
-            self.p1PubKey = keyOut;
-          })
+      //  this.$store.commit('players/add', e.target.value)
+      //  e.target.value = ''
+      var self=this;
+      return crypto.subtle.generateKey({name: "RSA-OAEP", modulusLength: 2048, publicExponent: new Uint8Array([0x01, 0x00, 0x01]), hash: {name: "SHA-256"}}, false, ["encrypt", "decrypt"])
+      .then(function(key){
+        crypto.subtle.exportKey('jwk', key.publicKey)
+        .then(function(keyOut){
+          self.p1PubKey = keyOut;
+          var data = 'test'
+          var ciphertext = CryptoJS.AES.encrypt(data, 'secret key 123');
+          self.p1PrivKey = ciphertext.toString();
         })
-        .catch(function(err){
-            console.error(err);
-        })
+      })
+      .catch(function(err){
+          console.error(err);
+      })
 
       alert('test')
     }
