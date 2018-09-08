@@ -1,17 +1,18 @@
 /** FullDeck UI helpers */
 
-var pki = forge.pki;
+function newKey() {
+  return new Promise((f, r) => forge.pki.rsa.generateKeyPair(
+    2048, (err, pair) => err ? r(err) : f(pair)))
+    .then(keypair => {
 
-function newKeys() {
-  alert("Local JS found in static/js/fulldeck.js");
+        return keypair;
+    });
 }
 
 function newVerifyKeys() {
-  var keys = pki.rsa.generateKeyPair(2048);
-  return  keys;
+  return newKey();
 }
 
 function newCryptKeys() {
-  var keys = pki.rsa.generateKeyPair(2048);
-  return  keys;
+  return newKey();
 }
