@@ -17,6 +17,51 @@
         Public Crypto Key: {{ players.p1.keys.crypt.publicKey }}
       </p>
     </div>
+    <div id="player2">
+      <p>Player 2</p>
+      <p>
+        Private Signing Key: {{ players.p2.keys.verify.privateKey }}
+      </p>
+      <p>
+        Public Signing Key: {{ players.p2.keys.verify.publicKey }}
+      </p>
+       <p>
+        Private Crypto Key: {{ players.p2.keys.crypt.privateKey }}
+      </p>
+      <p>
+        Public Crypto Key: {{ players.p2.keys.crypt.publicKey }}
+      </p>
+    </div>
+     <div id="player">
+      <p>Player 3</p>
+      <p>
+        Private Signing Key: {{ players.p3.keys.verify.privateKey }}
+      </p>
+      <p>
+        Public Signing Key: {{ players.p3.keys.verify.publicKey }}
+      </p>
+       <p>
+        Private Crypto Key: {{ players.p3.keys.crypt.privateKey }}
+      </p>
+      <p>
+        Public Crypto Key: {{ players.p3.keys.crypt.publicKey }}
+      </p>
+    </div>
+     <div id="player4">
+      <p>Player 4</p>
+      <p>
+        Private Signing Key: {{ players.p4.keys.verify.privateKey }}
+      </p>
+      <p>
+        Public Signing Key: {{ players.p4.keys.verify.publicKey }}
+      </p>
+       <p>
+        Private Crypto Key: {{ players.p4.keys.crypt.privateKey }}
+      </p>
+      <p>
+        Public Crypto Key: {{ players.p4.keys.crypt.publicKey }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -40,8 +85,39 @@ export default {
       //  e.target.value = ''
       var self=this;
 
-      var keys1 = newVerifyKeys();
-      self.players.p1.keys.verify = keys1;
+      newVerifyKeys()
+      .then(function(key){
+        self.players.p1.keys.verify.publicKey = forge.pki.publicKeyToPem(key.publicKey);
+      })
+      newVerifyKeys()
+      .then(function(key){
+        self.players.p2.keys.verify.publicKey = forge.pki.publicKeyToPem(key.publicKey);
+      })
+      newVerifyKeys()
+      .then(function(key){
+        self.players.p3.keys.verify.publicKey = forge.pki.publicKeyToPem(key.publicKey);
+      })
+      newVerifyKeys()
+      .then(function(key){
+        self.players.p4.keys.verify.publicKey = forge.pki.publicKeyToPem(key.publicKey);
+      })
+
+      newCryptKeys()
+      .then(function(key){
+        self.players.p1.keys.crypt.publicKey = forge.pki.publicKeyToPem(key.publicKey);
+      })
+      newCryptKeys()
+      .then(function(key){
+        self.players.p2.keys.crypt.publicKey = forge.pki.publicKeyToPem(key.publicKey);
+      })
+      newCryptKeys()
+      .then(function(key){
+        self.players.p3.keys.crypt.publicKey = forge.pki.publicKeyToPem(key.publicKey);
+      })
+      newCryptKeys()
+      .then(function(key){
+        self.players.p4.keys.crypt.publicKey = forge.pki.publicKeyToPem(key.publicKey);
+      })
 
     }
   },
