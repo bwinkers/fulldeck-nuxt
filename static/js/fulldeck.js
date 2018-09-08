@@ -10,3 +10,8 @@ function newVerifyKeys() {
   var keys = pki.rsa.generateKeyPair(2048);
   return  keys;
 }
+
+function newCryptKeys() {
+  var keys = pki.rsa.generateKeyPair(2048);
+  return  keys;
+}
