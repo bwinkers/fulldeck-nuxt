@@ -5,8 +5,16 @@
     <div id="player1">
       <p>Player 1</p>
       <p>
-        Private Key: {{ p1PrivKey }}
-        Public Key: {{ p1PubKey }}
+        Private Signing Key: {{ players.p1.keys.verify.privateKey }}
+      </p>
+      <p>
+        Public Signing Key: {{ players.p1.keys.verify.publicKey }}
+      </p>
+       <p>
+        Private Crypto Key: {{ players.p1.keys.crypt.privateKey }}
+      </p>
+      <p>
+        Public Crypto Key: {{ players.p1.keys.crypt.publicKey }}
       </p>
     </div>
   </div>
@@ -31,34 +39,68 @@ export default {
       //  this.$store.commit('players/add', e.target.value)
       //  e.target.value = ''
       var self=this;
-      return crypto.subtle.generateKey({name: "RSA-OAEP", modulusLength: 2048, publicExponent: new Uint8Array([0x01, 0x00, 0x01]), hash: {name: "SHA-256"}}, false, ["encrypt", "decrypt"])
-      .then(function(key){
-        crypto.subtle.exportKey('jwk', key.publicKey)
-        .then(function(keyOut){
-          self.p1PubKey = keyOut;
-          var data = 'test'
-          var ciphertext = CryptoJS.AES.encrypt(data, 'secret key 123');
-          self.p1PrivKey = ciphertext.toString();
-          var kesy1 = newVerifyKeys();
-        })
-      })
-      .catch(function(err){
-          console.error(err);
-      })
 
-      alert('test')
+      var keys1 = newVerifyKeys();
+      self.players.p1.keys.verify = keys1;
+
     }
   },
   data: function () {
     return {
-      p1PubKey: 'a',
-      p1PrivKey: 'b',
-      p2PubKey: 'c',
-      p2PrivKey: 'd',
-      p3PubKey: 'e',
-      p3PrivKey: 'f',
-      p4PubKey: 'g',
-      p4PrivKey: 'h'
+      players: {
+        p1: {
+          keys: {
+            verify: {
+              publicKey: '',
+              privateKey: ''
+            },
+            crypt: {
+              publicKey: '',
+              privateKey: ''
+            },
+            session: {}
+          }
+        },
+        p2: {
+          keys: {
+            verify: {
+              publicKey: '',
+              privateKey: ''
+            },
+            crypt: {
+              publicKey: '',
+              privateKey: ''
+            },
+            session: {}
+          }
+        },
+        p3: {
+          keys: {
+            verify: {
+              publicKey: '',
+              privateKey: ''
+            },
+            crypt: {
+              publicKey: '',
+              privateKey: ''
+            },
+            session: {}
+          }
+        },
+        p4: {
+          keys: {
+            verify: {
+              publicKey: '',
+              privateKey: ''
+            },
+            crypt: {
+              publicKey: '',
+              privateKey: ''
+            },
+            session: {}
+          }
+        }
+      }
     }
   }
 }
