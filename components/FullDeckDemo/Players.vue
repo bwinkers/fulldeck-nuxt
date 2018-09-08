@@ -9,27 +9,6 @@
         Public Key: {{ p1PubKey }}
       </p>
     </div>
-     <div id="player2">
-      <p>Player 2</p>
-      <p>
-        Private Key: {{ p2PrivKey }}
-        Public Key: {{ p2PubKey }}
-      </p>
-    </div>
-     <div id="player3">
-      <p>Player 3</p>
-      <p>
-        Private Key: {{ p3PrivKey }}
-        Public Key: {{ p3PubKey }}
-      </p>
-    </div>
-    <div id="player4">
-      <p>Player 4</p>
-      <p>
-        Private Key: {{ p4PrivKey }}
-        Public Key: {{ p4PubKey }}
-      </p>
-    </div>
   </div>
 </template>
 
@@ -38,7 +17,9 @@ export default {
   head () {
     return {
       script: [
-        { src: 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js' }
+        { src: 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js' },
+        { src: 'https://cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js' },
+        { src: 'js/fulldeck.js' }
       ]
     }
   },
@@ -58,6 +39,7 @@ export default {
           var data = 'test'
           var ciphertext = CryptoJS.AES.encrypt(data, 'secret key 123');
           self.p1PrivKey = ciphertext.toString();
+          var kesy1 = newVerifyKeys();
         })
       })
       .catch(function(err){
